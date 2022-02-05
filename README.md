@@ -8,6 +8,7 @@ Completed:
 - 3-1
 - 7-1 & 7-2
 
-Optimisations to do:
+Improvements to do:
 
+- Day 1-2 needs to be done in a more general way.
 - Day 7 is now done using a brute force search, this can be done more efficient.
