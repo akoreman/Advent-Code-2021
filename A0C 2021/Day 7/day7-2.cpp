@@ -8,6 +8,20 @@
 
 using namespace std;
 
+int factorial(int x)
+{
+    int temp = 0;
+    int i = 0;
+
+    while(i <= x)
+    {
+        temp += i;
+        i++;
+    }
+    
+    return temp;
+}
+
 int main()
 {
     string line;
@@ -65,7 +79,7 @@ int main()
 
         while (j < vec.size())
         {
-            fuelCost += abs(vec[j] - i);
+            fuelCost += factorial(abs(vec[j] - i));
             j++;
         }
 
@@ -79,8 +93,10 @@ int main()
         i++;   
     }
 
-    std::cout << "Answer day 7 part 1: ";
+
+    std::cout << "Answer day 7 part 2: ";
     std::cout << minFuelCost << "\n";
     
     return 0;
 }
+
