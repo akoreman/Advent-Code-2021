@@ -8,7 +8,7 @@
 
 using namespace std;
 
-int factorial(int x)
+int sum(int x)
 {
     int temp = 0;
     int i = 0;
@@ -79,7 +79,7 @@ int main()
 
         while (j < vec.size())
         {
-            fuelCost += factorial(abs(vec[j] - i));
+            fuelCost += sum(abs(vec[j] - i));
             j++;
         }
 
