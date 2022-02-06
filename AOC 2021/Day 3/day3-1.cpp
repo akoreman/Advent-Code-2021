@@ -7,19 +7,21 @@
 
 using namespace std;
 
+// First retrieve the bitstrings from all bits from the 1st, 2nd,.. etc. positions. Then make the appropriate counting.
+
 int main()
 {
     string line;
-    ifstream myfile;
+    ifstream myFile;
     
-    myfile.open("input.txt");
-    getline (myfile,line);
-    myfile.close();
+    myFile.open("input.txt");
+    getline (myFile,line);
+    myFile.close();
 
     int inputLength = line.length();
     double inputDepth = 0;
 
-    double* Array = new double[inputLength];
+    double* array = new double[inputLength];
 
     double gamma = 0;
     double epsilon = 0;
@@ -27,10 +29,10 @@ int main()
     int i = 0;
     while (i < inputLength)
     {
-        myfile.open("input.txt");
-        Array[i] = 0;
+        myFile.open("input.txt");
+        array[i] = 0;
 
-        while ( getline (myfile,line) )
+        while ( getline (myFile,line) )
         {
             if (i == 0)
                 inputDepth++;
@@ -38,16 +40,16 @@ int main()
             stringstream ss;  
             ss << line;  
 
-            Array[i] += (double) line[i] - 48;
+            array[i] += (double) line[i] - 48;
         }
 
-        if (Array[i]/inputDepth > 0.5)
+        if (array[i]/inputDepth > 0.5)
             gamma += pow(2, inputLength - 1 - i);
         else
             epsilon += pow(2,  inputLength - 1 - i);
 
         i++;
-        myfile.close();
+        myFile.close();
     }
     
     std::cout << gamma << "\n";

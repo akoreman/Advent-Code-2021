@@ -9,50 +9,50 @@ using namespace std;
 int main()
 {
     int horPos = 0;
-    int Aim = 0;
-    int Depth = 0;
+    int aim = 0;
+    int depth = 0;
 
     string line;
-    ifstream myfile;
+    ifstream myFile;
 
-    myfile.open("input.txt");
+    myFile.open("input.txt");
 
-    string Word;
-    string Number;
+    string word;
+    string number;
     int intNumber;
     char splitChar = ' ';
     int splitPos;
 
-    while ( getline (myfile,line) )
+    while ( getline (myFile,line) )
     {
         stringstream ss;  
         ss << line;  
     
         splitPos = line.find(splitChar);
-        Word = line.substr(0,splitPos);
-        Number = line.substr(splitPos + 1, splitPos + 2);
+        word = line.substr(0,splitPos);
+        number = line.substr(splitPos + 1, splitPos + 2);
 
-        intNumber = (int) Number[0] - 48;
+        intNumber = (int) number[0] - 48;
 
-        if (Word == "forward")
+        if (word == "forward")
         {
             horPos += intNumber;
-            Depth += Aim * intNumber;
+            depth += Aim * intNumber;
         }
-        else if (Word == "down")
+        else if (word == "down")
         {
-            Aim += intNumber;
+            aim += intNumber;
         }
-        else if (Word == "up")
+        else if (word == "up")
         {
-            Aim -= intNumber;
+            aim -= intNumber;
         }
     }
 
     myfile.close();
 
     std::cout << "Answer day 2 part 2: ";
-    std::cout << horPos * Depth << "\n";
+    std::cout << horPos * depth << "\n";
 
     return 0;
 }

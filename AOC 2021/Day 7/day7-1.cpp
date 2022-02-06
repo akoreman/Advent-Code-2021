@@ -11,12 +11,12 @@ using namespace std;
 int main()
 {
     string line;
-    ifstream myfile;
+    ifstream myFile;
     
     vector<int> vec;
 
-    myfile.open("input.txt");
-    getline (myfile,line);
+    myFile.open("input.txt");
+    getline (myFile,line);
     myfile.close();
 
     int i = 0;

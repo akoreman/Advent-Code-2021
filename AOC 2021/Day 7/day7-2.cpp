@@ -25,13 +25,13 @@ int sum(int x)
 int main()
 {
     string line;
-    ifstream myfile;
+    ifstream myFile;
     
     vector<int> vec;
 
-    myfile.open("input.txt");
-    getline (myfile,line);
-    myfile.close();
+    myFile.open("input.txt");
+    getline (myFile,line);
+    myFile.close();
 
     int i = 0;
 

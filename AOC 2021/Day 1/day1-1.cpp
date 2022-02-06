@@ -9,31 +9,32 @@ using namespace std;
 int main()
 {
     int count = 0;
-    int oldnum = 0;
-    int newnum = 0;
+    int oldNum = 0;
+    int newNum = 0;
 
     string line;
-    ifstream myfile;
+    ifstream myFile;
 
-    myfile.open("input.txt");
+    myFile.open("input.txt");
 
-    getline (myfile,line);
+    getline (myFile,line);
     stringstream ss; 
     ss << line;  
-    ss >> oldnum; 
+    ss >> oldNum; 
 
-    while ( getline (myfile,line) )
+    // Loop over every line and check whether it is an increase from the previous entry.
+    while ( getline (myFile,line) )
     {
         stringstream ss;  
         ss << line;  
-        ss >> newnum; 
+        ss >> newNum; 
 
-        if (newnum > oldnum)
+        if (newNum > oldNum)
             count++;
 
-        oldnum = newnum;       
+        oldNum = newNum;       
     }
-    myfile.close();
+    myFile.close();
 
     std::cout << count << '\n';
 
