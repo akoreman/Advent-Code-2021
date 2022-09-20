@@ -9,6 +9,18 @@
 
 using namespace std;
 
+bool AreVectorsEqual(vector<int> A, vector<int> B)
+{
+    if (A.size() != B.size())
+        return false;
+
+    for (int x = 0; x < A.size(); x++)
+        if (A[x] != B[x])
+            return false;
+
+    return true;
+};
+
 int main()
 {
     struct Position2D{
@@ -27,6 +39,8 @@ int main()
         }
     };  
 
+    
+
     string line;
     ifstream myFile;
     
@@ -36,6 +50,8 @@ int main()
 
     int maxX = 0;
     int maxY = 0;
+
+    int lineCount = 0;
 
     myFile.open("input.txt");
 
@@ -74,6 +90,8 @@ int main()
 
         map[position] = position;
         positionVector.push_back(position);
+
+        lineCount++;
     }
 
     std::getline(myFile,line);
@@ -91,23 +109,34 @@ int main()
     cout << "fold axis: " << foldAxis << '\n';
     cout << "fold line: " << foldLine << '\n';
 
-    score = positionVector.size();
+    score = lineCount;
 
-    for (int i = 0; i < positionVector.size(); i++)
+    for (int i = 0; i < lineCount; i++)
     {
         if (foldAxis == 'x')
         {
             if (positionVector[i][0] >= foldLine)
             {
+                cout << positionVector[i][0] << " " << positionVector[i][1] << '\n';
+
                 vector<int> transformedVector{foldLine - (positionVector[i][0] - foldLine + 1), positionVector[i][1]};
 
+                //cout << transformedVector[0] << " " << transformedVector[1] << '\n';
                 /*
                 if ( map.find(transformedVector) != map.end() )
                     score--;
                 */
-                
+                /*
                 if (find(positionVector.begin(), positionVector.end(), transformedVector) != positionVector.end())
                     score--;
+                */
+                for (int j = 0; j < positionVector.size(); j++)
+                    if (AreVectorsEqual(positionVector[j], transformedVector))
+                    {
+                        score--;
+                        cout << "yay" << "\n";
+                    }
+
             }
         }
         else
@@ -126,6 +155,7 @@ int main()
 
     return 0;
 }
+
 
 
 
