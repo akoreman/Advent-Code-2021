@@ -39,8 +39,6 @@ int main()
         }
     };  
 
-    
-
     string line;
     ifstream myFile;
     
@@ -81,8 +79,6 @@ int main()
         ss << yString;
         ss >> y;
 
-        cout << x << ' ' << y << '\n';
-
         if (x > maxX) { maxX = x; }
         if (y > maxY) { maxY = y; }
 
@@ -106,9 +102,6 @@ int main()
     ss << foldLineString;
     ss >> foldLine;
 
-    cout << "fold axis: " << foldAxis << '\n';
-    cout << "fold line: " << foldLine << '\n';
-
     score = lineCount;
 
     for (int i = 0; i < lineCount; i++)
@@ -117,39 +110,30 @@ int main()
         {
             if (positionVector[i][0] >= foldLine)
             {
-                cout << positionVector[i][0] << " " << positionVector[i][1] << '\n';
+                vector<int> transformedVector{foldLine - (positionVector[i][0] - foldLine), positionVector[i][1]};
 
-                vector<int> transformedVector{foldLine - (positionVector[i][0] - foldLine + 1), positionVector[i][1]};
-
-                //cout << transformedVector[0] << " " << transformedVector[1] << '\n';
-                /*
                 if ( map.find(transformedVector) != map.end() )
-                    score--;
-                */
-                /*
-                if (find(positionVector.begin(), positionVector.end(), transformedVector) != positionVector.end())
-                    score--;
-                */
-                for (int j = 0; j < positionVector.size(); j++)
-                    if (AreVectorsEqual(positionVector[j], transformedVector))
-                    {
-                        score--;
-                        cout << "yay" << "\n";
-                    }
-
+                    score--;                
             }
         }
         else
         {
             if (positionVector[i][1] >= foldLine)
             {
-                vector<int> vec{positionVector[i][0], foldLine - (positionVector[i][1] - foldLine + 1)};
+                vector<int> vec{positionVector[i][0], foldLine - (positionVector[i][1] - foldLine)};
 
                 if ( map.find(vec) == map.end() )
                     score--;
             }
         }
     }
+    /*
+    cout << "fold axis: " << foldAxis << '\n';
+    cout << "fold line: " << foldLine << '\n';
+
+    cout << "max x: " << maxX << '\n';
+    cout << "max y: " << maxX << '\n';
+    */
 
     std::cout << "Answer day 13 part 1: " << score << "\n";
 
