@@ -58,6 +58,7 @@ int main()
 
     long minFuelCost = 1000000000;
 
+    // This should be done more efficiently.
     while(i <= farthestPosition)
     {
         int fuelCost = 0;
@@ -79,8 +80,7 @@ int main()
         i++;   
     }
 
-    std::cout << "Answer day 7 part 1: ";
-    std::cout << minFuelCost << "\n";
+    std::cout << "Answer day 7 part 1: " << minFuelCost << "\n";
     
     return 0;
 }
