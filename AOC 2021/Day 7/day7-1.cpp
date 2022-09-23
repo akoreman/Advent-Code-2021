@@ -8,6 +8,8 @@
 
 using namespace std;
 
+// This can probably be done more efficiently.
+
 int main()
 {
     string line;
@@ -58,7 +60,6 @@ int main()
 
     long minFuelCost = 1000000000;
 
-    // This should be done more efficiently.
     while(i <= farthestPosition)
     {
         int fuelCost = 0;
