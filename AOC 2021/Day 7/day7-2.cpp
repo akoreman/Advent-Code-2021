@@ -8,6 +8,8 @@
 
 using namespace std;
 
+// This can probably be done more efficiently.
+
 int sum(int x)
 {
     int temp = 0;
@@ -94,8 +96,7 @@ int main()
     }
 
 
-    std::cout << "Answer day 7 part 2: ";
-    std::cout << minFuelCost << "\n";
+    std::cout << "Answer day 7 part 2: " << minFuelCost << "\n";
     
     return 0;
 }
