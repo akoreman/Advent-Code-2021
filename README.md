@@ -1,6 +1,6 @@
 # Advent of Code 2021
 WIP. Working through the algorithmic puzzles of advent of code 2021, in C++.  
-Current star tally: 12.
+Current star tally: 14.
 
 Completed:
 - 1-1 & 1-2
@@ -10,7 +10,8 @@ Completed:
 - 8-1
 - 9-1
 - 10-1 & 10-2
-- 13-1
+- 13-1 & 13-2
+- 14-1
 
 Improvements to do:
 
