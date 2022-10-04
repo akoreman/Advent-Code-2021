@@ -38,8 +38,6 @@ int main()
         translationMap[before] = after;
     }
 
-    string output;
-
     while (numIterations > 0)
     {
         string output;
