@@ -11,9 +11,9 @@ Completed:
 - 9-1
 - 10-1 & 10-2
 - 13-1 & 13-2
-- 14-1
+- 14-1 & 14-2
 
-Improvements to do:
+Notes:
 
 - Day 1-2 needs to be done in a more general way.
-- Day 7 is now done using a brute force search, this can probably be done more efficient.
+- Day 14: Part 1 is done brute-force, part 2 in a more optimized way.
