@@ -21,17 +21,13 @@ void eql(int *a, int *b);
 
 int main()
 {
-    ifstream myFile;
-    string line;
-    
-    stringstream ss;
-
     long long input = 99999999999999;
 
     bool finished = false;
 
     do
     {
+        ifstream myFile;
         myFile.open("input.txt");
         bool skip = false;
 
@@ -40,10 +36,12 @@ int main()
         int* y = (int*) calloc(1, sizeof(int));
         int* z = (int*) calloc(1, sizeof(int));
 
-        std::cout << input << '\n';
-
+        //std::cout << input << '\n';
+        stringstream ss;
         ss << input;
         string inputString = ss.str();
+
+        inputStack = {};
 
         for (int i = inputString.length() - 1; i >= 0; i--)
         {
@@ -53,18 +51,24 @@ int main()
 
         string operation;
 
-        char a;
-        char b;
+        string line;
 
-        int* aPointer = (int*) malloc(sizeof(int));
-        int* bPointer = (int*) malloc(sizeof(int));
+        int* varPointer = (int*) malloc(sizeof(int));
 
         while (std::getline(myFile,line))
         {
+            cout << w << '\n';
+
+            int* aPointer;
+            int* bPointer = (int*) calloc(1, sizeof(int));
+
             operation = line.substr(0,3);
 
-            a = line[4];
-            b = line[6];
+            char a = line[4];
+            char b = line[6];
+            char bl = line[7];
+
+            //cout << "a " << a << " b " << b << bl << '\n';
 
             if (a == 'w')
                 aPointer = w;
@@ -78,21 +82,33 @@ int main()
             if (a == 'z')
                 aPointer = z;
             
-            if (b > '0' && b <= '9'){
-                *bPointer = b - '0';
-            } else {
-                if (b == 'w')
-                    bPointer = w;
 
-                if (b == 'x')
-                    bPointer = x;
 
-                if (b == 'y')
-                    bPointer = y;
 
-                if (b == 'z')
-                    bPointer = z;
+            if (b > '0' && b <= '9')
+            {
+                bPointer = varPointer;
+                if (bl != NULL)
+                    *bPointer = (b - '0') * 10 + (bl - '0');
+                else
+                    *bPointer = (b - '0');
             }
+
+            if (b == 'w')
+                bPointer = w;
+
+            if (b == 'x')
+                bPointer = x;
+
+            if (b == 'y')
+                bPointer = y;
+
+            if (b == 'z')
+                bPointer = z;
+            
+
+
+
 
             if (operation == "inp")
                 inp(aPointer);
@@ -116,11 +132,9 @@ int main()
         std::cout << *z << '\n';
 
         if (*z == 0 && !skip)
-        {
             finished = true;
-        } else {
+        else 
             input--;
-        }
 
     }while(!finished);
 
@@ -128,39 +142,46 @@ int main()
     return 0;
 }
 
-void inp(int *a)
+void inp(int* a)
 {
+    //cout << "inp " << *a << " " << inputStack.top() << '\n';
     *a = inputStack.top();
     inputStack.pop();
+    //cout << "a " << *a << '\n';
     return;
 };
 
-void add(int *a, int *b)
+void add(int* a, int* b)
 {
-    *a = *a + *b;
+    //cout << "add " << *a << " " << *b << '\n';
+    *a += *b;
     return;
 };
 
-void mul(int *a, int *b)
+void mul(int* a, int* b)
 {
-    *a = *a * *b;
+    //cout << "mul " << *a << " " << *b << '\n';
+    *a *= *b;
     return;
 };
 
-void div(int *a, int *b)
+void div(int* a, int* b)
 {
+    //cout << "div " << *a << " " << *b << '\n';
     *a = floor(*a / *b);
     return;
 };
 
-void mod(int *a, int *b)
+void mod(int* a, int* b)
 {
-    *a = *a % *b;
+    //cout << "mod " << *a << " " << *b << '\n';
+    *a %= *b;
     return;
 };
 
-void eql(int *a, int *b)
+void eql(int* a, int* b)
 {
+    //cout << "eql " << *a << " " << *b << '\n';
     *a = (*a == *b) ? 1 : 0;
     return;
 };
