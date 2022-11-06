@@ -19,3 +19,4 @@ Notes:
 
 - Day 1-2 needs to be done in a more general way.
 - Day 14: Part 1 is done brute-force, part 2 in a more optimized way.
+- Day 24: Solved using pen and paper, program was only used to verify result.
