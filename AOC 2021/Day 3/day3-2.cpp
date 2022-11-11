@@ -4,14 +4,11 @@
 #include <fstream>
 #include <sstream>
 #include <math.h>
-#include <queue>
 
 using namespace std;
 
 int main()
 {
-    cout << "yaay" << '\n';
-
     string line;
     ifstream myfile;
     
@@ -22,7 +19,6 @@ int main()
     myfile.open("input.txt");
 
     int inputLength = line.length();
-    double inputDepth = 0;
 
     vector<vector<int>> O2Vector;
     vector<vector<int>> CO2Vector;
@@ -31,17 +27,21 @@ int main()
     {
         vector<int> var;
 
-        for (int i = 0; i < inputDepth; i++)
+        for (int i = 0; i < inputLength; i++)
             var.push_back(line[i] - '0');
 
         O2Vector.push_back(var);
         CO2Vector.push_back(var);
     }
 
-    int m = 0;
+    myfile.close();
 
-    while(O2Vector.size() != 1)
+    int m = 0;
+    
+    do
     {
+        //cout << O2Vector.size() << '\n';
+
         int zeroCount = 0;
         int oneCount = 0;
 
@@ -52,8 +52,6 @@ int main()
             else   
                 oneCount++;
         }
-
-        m++;
 
         for (int i = 0; i < O2Vector.size(); i++)
         {
@@ -68,10 +66,18 @@ int main()
                     O2Vector.erase(O2Vector.begin() + i);
             }
         }
-    }
 
-    while(CO2Vector.size() != 1)
+        m++;
+    }while(O2Vector.size() != 1);
+    
+    cout << O2Vector.size() << '\n';
+
+    m = 0;
+    
+    do
     {
+        //cout << CO2Vector.size() << '\n';
+
         int zeroCount = 0;
         int oneCount = 0;
 
@@ -82,8 +88,6 @@ int main()
             else   
                 oneCount++;
         }
-
-        m++;
 
         for (int i = 0; i < CO2Vector.size(); i++)
         {
@@ -98,19 +102,37 @@ int main()
                     CO2Vector.erase(CO2Vector.begin() + i);
             }
         }
-    }
+
+        m++;
+    }while(CO2Vector.size() != 1);
     
+    cout << CO2Vector.size() << '\n';
+    
+    long Orating = 0;
+
     for (int i = 0; i < O2Vector[0].size(); i++)
+    {
         cout << O2Vector[0][i];
+        Orating += pow(2, inputLength - 1 - i) * O2Vector[0][i];
+    }
 
     cout << '\n';
+    
+    cout << Orating << '\n';
+
+    long COrating = 0;
 
     for (int i = 0; i < CO2Vector[0].size(); i++)
+    {
         cout << CO2Vector[0][i];
+        COrating += pow(2, inputLength - 1 - i) * CO2Vector[0][i];
+    }
 
     cout << '\n';
+    
+    cout << COrating << '\n';
 
-    cout << "Answer day 3 part 2: ";
+    cout << "Answer day 3 part 2: " << Orating * COrating << '\n';
 
     return 0;
 }
