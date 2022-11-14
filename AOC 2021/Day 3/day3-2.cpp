@@ -7,6 +7,8 @@
 
 using namespace std;
 
+int bitVectorToBase10(vector<int> vector);
+
 int main()
 {
     string line;
@@ -18,20 +20,18 @@ int main()
 
     myfile.open("input.txt");
 
-    int inputLength = line.length();
-
     vector<vector<int>> O2Vector;
     vector<vector<int>> CO2Vector;
 
     while (getline(myfile,line))
     {
-        vector<int> var;
+        vector<int> vec;
 
-        for (int i = 0; i < inputLength; i++)
-            var.push_back(line[i] - '0');
+        for (int i = 0; i < line.length(); i++)
+            vec.push_back(line[i] - '0');
 
-        O2Vector.push_back(var);
-        CO2Vector.push_back(var);
+        O2Vector.push_back(vec);
+        CO2Vector.push_back(vec);
     }
 
     myfile.close();
@@ -40,8 +40,6 @@ int main()
     
     do
     {
-        //cout << O2Vector.size() << '\n';
-
         int zeroCount = 0;
         int oneCount = 0;
 
@@ -53,31 +51,31 @@ int main()
                 oneCount++;
         }
 
+        vector<vector<int>> newVector;
+
         for (int i = 0; i < O2Vector.size(); i++)
         {
             if (oneCount >= zeroCount)
             {
-                if (O2Vector[i][m] == 0)
-                    O2Vector.erase(O2Vector.begin() + i);
+                if (O2Vector[i][m] == 1)
+                    newVector.push_back(O2Vector[i]);
             }
             else 
             {
-                if (O2Vector[i][m] == 1)
-                    O2Vector.erase(O2Vector.begin() + i);
+                if (O2Vector[i][m] == 0)
+                    newVector.push_back(O2Vector[i]);
             }
         }
+
+        O2Vector = newVector;
 
         m++;
     }while(O2Vector.size() != 1);
     
-    cout << O2Vector.size() << '\n';
-
     m = 0;
     
     do
     {
-        //cout << CO2Vector.size() << '\n';
-
         int zeroCount = 0;
         int oneCount = 0;
 
@@ -89,50 +87,42 @@ int main()
                 oneCount++;
         }
 
+        vector<vector<int>> newVector;
+
         for (int i = 0; i < CO2Vector.size(); i++)
         {
-            if (zeroCount >= oneCount)
+            if (zeroCount <= oneCount)
             {
-                if (CO2Vector[i][m] == 1)
-                    CO2Vector.erase(CO2Vector.begin() + i);
+                if (CO2Vector[i][m] == 0)
+                    newVector.push_back(CO2Vector[i]);
             }
             else 
             {
-                if (CO2Vector[i][m] == 0)
-                    CO2Vector.erase(CO2Vector.begin() + i);
+                if (CO2Vector[i][m] == 1)
+                    newVector.push_back(CO2Vector[i]);
             }
         }
+
+        CO2Vector = newVector;
 
         m++;
     }while(CO2Vector.size() != 1);
     
-    cout << CO2Vector.size() << '\n';
-    
-    long Orating = 0;
-
-    for (int i = 0; i < O2Vector[0].size(); i++)
-    {
-        cout << O2Vector[0][i];
-        Orating += pow(2, inputLength - 1 - i) * O2Vector[0][i];
-    }
-
-    cout << '\n';
-    
-    cout << Orating << '\n';
-
-    long COrating = 0;
-
-    for (int i = 0; i < CO2Vector[0].size(); i++)
-    {
-        cout << CO2Vector[0][i];
-        COrating += pow(2, inputLength - 1 - i) * CO2Vector[0][i];
-    }
-
-    cout << '\n';
-    
-    cout << COrating << '\n';
+    long Orating = bitVectorToBase10(O2Vector[0]);
+    long COrating = bitVectorToBase10(CO2Vector[0]);
 
     cout << "Answer day 3 part 2: " << Orating * COrating << '\n';
 
     return 0;
+}
+
+// function to convert from an array of bits to a base 10 int.
+int bitVectorToBase10(vector<int> vector)
+{
+    int output = 0;
+
+    for (int i = 0; i < vector.size(); i++)
+        output += pow(2, vector.size() - 1 - i) * vector[i];
+
+    return output;
 }
