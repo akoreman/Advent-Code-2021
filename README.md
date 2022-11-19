@@ -15,7 +15,7 @@ Completed:
 - 14-1 & 14-2
 - 24-1 & 24-2
 
-In progres:
+In progress:
  - 22-1
 
 Notes:
